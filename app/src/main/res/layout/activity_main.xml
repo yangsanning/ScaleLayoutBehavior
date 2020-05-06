@@ -1,18 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@color/app_bg">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <ysn.com.behavior.scalelayout.support_25_3_1.AppBarLayout
+        android:id="@+id/main_activity_appbarLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical"
+        app:elevation="0dp"
+        app:layout_behavior="ysn.com.behavior.scalelayout.ScaleLayoutBehavior">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+            <!--缩放布局-->
+            <include layout="@layout/layout_scale_layout" />
+
+            <!--缩放布局下方布局-->
+            <include layout="@layout/layout_scale_layout_bottom_layout" />
+
+            <android.support.v7.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/app_bar"
+                android:background="@android:color/transparent"
+                app:contentInsetStart="0dp"
+                app:popupTheme="@style/Widget.AppCompat.Toolbar" />
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </ysn.com.behavior.scalelayout.support_25_3_1.AppBarLayout>
+
+    <!--内容-->
+    <include layout="@layout/layout_content" />
+
+    <!--标题-->
+    <include layout="@layout/layout_toolbar" />
+</android.support.design.widget.CoordinatorLayout>

@@ -8,14 +8,13 @@ ext {
     ]
 
     dependVersion = [
-            appcompat: "1.1.0",
-            constraintlayout: "1.1.3",
+            support_version: "28.0.0",
     ]
 
-    androidxLib = [
-            appcompat: "androidx.appcompat:appcompat:$dependVersion.appcompat",
-            constraintlayout: "androidx.constraintlayout:constraintlayout:$dependVersion.constraintlayout",
+    supportLib = [
+            v7    : "com.android.support:appcompat-v7:$dependVersion.support_version",
+            design: "com.android.support:design:$dependVersion.support_version",
     ]
 
-    androidxLibs = androidxLib.values()
+    supportLibs = supportLib.values()
 }

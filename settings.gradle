@@ -1,2 +1,3 @@
 rootProject.name='ScaleLayoutBehavior'
 include ':app'
+include ':scalelayoutbehavior'

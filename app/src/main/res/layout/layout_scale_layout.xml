@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ysn.com.behavior.scalelayout.ScaleLayoutScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    app:layout_collapseMode="parallax">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="320dp"
+            android:tag="scaleLayout">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/banner" />
+        </FrameLayout>
+
+        <!--缩放布局信息布局-->
+        <include layout="@layout/layout_scale_layout_info_layout" />
+    </RelativeLayout>
+</ysn.com.behavior.scalelayout.ScaleLayoutScrollView>
