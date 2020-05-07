@@ -9,12 +9,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="@string/text_content"
-            android:textColor="@color/app_text_summary"
-            android:textSize="20sp" />
+        <android.support.design.widget.TabLayout
+            android:id="@+id/main_activity_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/app_bar"
+            android:background="@android:color/white" />
     </ysn.com.behavior.scalelayout.ScaleLayoutScrollView>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/main_activity_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>

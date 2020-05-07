@@ -121,7 +121,7 @@ public class ScaleLayoutBehavior extends AppBarLayout.Behavior {
             scaleLayoutBottomLayout = view.findViewWithTag(TAG_SCALE_LAYOUT_BOTTOM_LAYOUT);
         }
 
-        if (scaleLayout != null) {
+        if (scaleLayout != null && scaleLayoutHeight == 0) {
             appBarLayout.setClipChildren(false);
             appBarLayoutHeight = appBarLayout.getHeight();
             scaleLayoutHeight = scaleLayout.getHeight();

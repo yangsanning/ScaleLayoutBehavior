@@ -3,6 +3,8 @@ package ysn.com.demo.scalelayoutbehavior;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -13,9 +15,15 @@ import android.widget.TextView;
 import ysn.com.behavior.scalelayout.AppBarStateChangeListener;
 import ysn.com.behavior.scalelayout.ScaleLayoutBehavior;
 import ysn.com.behavior.scalelayout.support_25_3_1.AppBarLayout;
+import ysn.com.demo.scalelayoutbehavior.adapter.FragmentPagerAdapter;
+import ysn.com.demo.scalelayoutbehavior.page.EmptyFragment;
+import ysn.com.demo.scalelayoutbehavior.utils.ColorUtils;
 import ysn.com.statusbar.StatusBarUtils;
 
 public class MainActivity extends AppCompatActivity {
+
+    private ScaleLayoutBehavior scaleLayoutBehavior;
+    private String[] titles = {"推荐", "分类", "排行", "管理", "我的"};
 
     private View titleBarView;
     private AppBarLayout appBarLayout;
@@ -23,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageView backImageView;
     private TextView titleTextView;
     private ImageView editImageView;
-    private ScaleLayoutBehavior scaleLayoutBehavior;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         backImageView = findViewById(R.id.main_activity_back);
         titleTextView = findViewById(R.id.main_activity_title);
         editImageView = findViewById(R.id.main_activity_edit);
+        tabLayout = findViewById(R.id.main_activity_tab_layout);
+        viewPager = findViewById(R.id.main_activity_view_pager);
 
         scaleLayoutBehavior = (ScaleLayoutBehavior) ((CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams()).getBehavior();
 
@@ -45,7 +56,22 @@ public class MainActivity extends AppCompatActivity {
         ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) titleBarView.getLayoutParams();
         params.topMargin += StatusBarUtils.getStatusBarHeight(this);
 
+        StatusBarUtils.setPaddingTop(MainActivity.this, findViewById(R.id.main_activity_tool_bar));
+
+        initViewPager();
         setListener();
+    }
+
+    private void initViewPager() {
+        FragmentPagerAdapter adapter = new FragmentPagerAdapter(getSupportFragmentManager());
+        for (String title : titles) {
+            adapter.addFragment(title, EmptyFragment.newInstance(title));
+        }
+        viewPager.setAdapter(adapter);
+        //将ViewPager与TabLayout绑定
+        tabLayout.setupWithViewPager(viewPager);
+        //显示样式
+        tabLayout.setTabMode(TabLayout.MODE_FIXED);
     }
 
     private void setListener() {
@@ -90,22 +116,9 @@ public class MainActivity extends AppCompatActivity {
                     editImageView.setAlpha(alpha);
                 }
                 titleTextView.setAlpha(alpha);
-                StatusBarUtils.setColor(MainActivity.this, getColorWithAlpha(alpha, Color.WHITE));
+                StatusBarUtils.setColor(MainActivity.this, ColorUtils.getColorWithAlpha(alpha, Color.WHITE));
             }
         };
         appBarLayout.addOnOffsetChangedListener(appBarStateChangeListener);
-    }
-
-    /**
-     * 给color添加透明度
-     *
-     * @param alpha     透明度 0f～1f
-     * @param baseColor 基本颜色
-     * @return
-     */
-    public static int getColorWithAlpha(float alpha, int baseColor) {
-        int a = Math.min(255, Math.max(0, (int) (alpha * 255))) << 24;
-        int rgb = 0x00ffffff & baseColor;
-        return a + rgb;
     }
 }
