@@ -103,18 +103,20 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onAlphaChanged(float alpha) {
-                titleBgView.setAlpha(alpha);
                 if (alpha == 0) {
                     backImageView.setColorFilter(Color.WHITE);
                     editImageView.setColorFilter(Color.WHITE);
                     backImageView.setAlpha(1f);
                     editImageView.setAlpha(1f);
+                } else if (alpha < 0.02f) {
+                    return;
                 } else {
                     backImageView.setColorFilter(Color.BLACK);
                     editImageView.setColorFilter(Color.BLACK);
                     backImageView.setAlpha(alpha);
                     editImageView.setAlpha(alpha);
                 }
+                titleBgView.setAlpha(alpha);
                 titleTextView.setAlpha(alpha);
                 StatusBarUtils.setColor(MainActivity.this, ColorUtils.getColorWithAlpha(alpha, Color.WHITE));
             }
