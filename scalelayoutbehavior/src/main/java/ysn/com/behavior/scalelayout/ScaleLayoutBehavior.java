@@ -195,6 +195,8 @@ public class ScaleLayoutBehavior extends AppBarLayout.Behavior {
      */
     private void scale(AppBarLayout appBarLayout, View target, int dy) {
         totalDy -= dy;
+        // 保证缩放大于>=1
+        totalDy = Math.max(0, totalDy);
 
         // 限制最大拉伸
         lastScale = Math.min(maxScale, 1f + totalDy / maxScaleLayoutHeight);
