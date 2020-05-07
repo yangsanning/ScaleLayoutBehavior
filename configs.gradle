@@ -16,5 +16,10 @@ ext {
             design: "com.android.support:design:$dependVersion.support_version",
     ]
 
+    ysnLib = [
+            status_bar_utils: "com.github.yangsanning:StatusBarUtils:1.0.1",
+    ]
+
     supportLibs = supportLib.values()
+    ysnLibs = ysnLib.values()
 }

@@ -26,6 +26,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation rootProject.ext.supportLibs
+    implementation rootProject.ext.ysnLibs
 
     implementation project(':scalelayoutbehavior')
 }
