@@ -33,7 +33,7 @@ public class ScaleLayoutBehavior extends AppBarLayout.Behavior {
     /**
      * maxScale: 最大缩放
      */
-    private float maxScale = 1.5f;
+    private float maxScale = 1.9f;
 
     /**
      * scaleLayout: 缩放布局
@@ -121,13 +121,24 @@ public class ScaleLayoutBehavior extends AppBarLayout.Behavior {
             scaleLayoutBottomLayout = view.findViewWithTag(TAG_SCALE_LAYOUT_BOTTOM_LAYOUT);
         }
 
-        if (scaleLayout != null && scaleLayoutHeight == 0) {
-            appBarLayout.setClipChildren(false);
-            appBarLayoutHeight = appBarLayout.getHeight();
+        if (scaleLayoutHeight != 0) {
+            return;
+        }
+
+        appBarLayout.setClipChildren(false);
+        appBarLayoutHeight = appBarLayout.getHeight();
+
+        if (scaleLayout != null) {
             scaleLayoutHeight = scaleLayout.getHeight();
             maxScaleLayoutHeight = maxScale * scaleLayoutHeight;
-            scaleLayoutBottomLayoutHeight = scaleLayoutBottomLayout.getHeight();
+        }
+
+        if (scaleLayoutInfoLayout != null) {
             scaleLayoutInfoLayoutHeight = scaleLayoutInfoLayout.getHeight();
+        }
+
+        if (scaleLayoutBottomLayout != null) {
+            scaleLayoutBottomLayoutHeight = scaleLayoutBottomLayout.getHeight();
         }
     }
 
@@ -209,8 +220,8 @@ public class ScaleLayoutBehavior extends AppBarLayout.Behavior {
         }
 
         if (scaleLayoutInfoLayout != null) {
-            scaleLayoutInfoLayout.setBottom(lastBottom - scaleLayoutBottomLayoutHeight);
             scaleLayoutInfoLayout.setTop(lastBottom - scaleLayoutBottomLayoutHeight - scaleLayoutInfoLayoutHeight);
+            scaleLayoutInfoLayout.setBottom(lastBottom - scaleLayoutBottomLayoutHeight);
         }
 
         if (scaleLayoutBottomLayout != null) {
@@ -328,6 +339,21 @@ public class ScaleLayoutBehavior extends AppBarLayout.Behavior {
     }
 
     /**
+     * 设置最大缩放
+     */
+    public void setMaxScale(float maxScale) {
+        this.maxScale = maxScale;
+        maxScaleLayoutHeight = maxScale * scaleLayoutHeight;
+    }
+
+    /**
+     * 设置缩放倍数监听
+     */
+    public void setOnScaleChangeListener(OnScaleChangeListener onScaleChangeListener) {
+        this.onScaleChangeListener = onScaleChangeListener;
+    }
+
+    /**
      * 缩放倍数的监听
      */
     public interface OnScaleChangeListener {
@@ -337,12 +363,5 @@ public class ScaleLayoutBehavior extends AppBarLayout.Behavior {
          * @param isRelease 是否是释放状态
          */
         void onScaleChange(float scale, boolean isRelease);
-    }
-
-    /**
-     * 设置缩放倍数监听
-     */
-    public void setOnScaleChangeListener(OnScaleChangeListener onScaleChangeListener) {
-        this.onScaleChangeListener = onScaleChangeListener;
     }
 }
