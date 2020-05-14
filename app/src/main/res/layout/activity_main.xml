@@ -41,4 +41,39 @@
 
     <!--标题-->
     <include layout="@layout/layout_title_bar" />
+
+    <LinearLayout
+        android:id="@+id/bottom_button_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_bar"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="10dp">
+
+        <Button
+            android:id="@+id/talk_with"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="私聊"
+            android:textColor="@color/app_text_title"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/invitate_with"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="10dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="提问"
+            android:textColor="@color/app_text_title"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>
